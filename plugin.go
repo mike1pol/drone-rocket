@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"log"
 	"net/http"
 	"strings"
 
@@ -144,7 +143,6 @@ func (p *Plugin) SendMessage(msg string) error {
 	if err := json.NewEncoder(b).Encode(payload); err != nil {
 		return err
 	}
-	log.Println(URL, b)
 	client := &http.Client{}
 	req, err := http.NewRequest("POST", URL, b)
 	if err != nil {
@@ -153,7 +151,6 @@ func (p *Plugin) SendMessage(msg string) error {
 	req.Header.Add("X-User-Id", p.Config.UserID)
 	req.Header.Add("X-Auth-Token", p.Config.Token)
 	resp, err := client.Do(req)
-	log.Println(resp)
 	defer resp.Body.Close()
 	if err != nil {
 		return err

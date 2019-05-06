@@ -1,0 +1,62 @@
+kind: pipeline
+name: build
+steps:
+- name: build
+  pull: always
+  image: golang:1.12
+  commands:
+    - make build
+
+- name: docker
+  image: plugins/docker
+  settings:
+    repo: mike1pol/drone-rocket
+    dockerfile: Dockerfile
+    tags: latest
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+
+trigger:
+  event:
+  - push
+  branch:
+  - master
+
+---
+kind: pipeline
+name: after
+
+steps:
+- name: notify
+  image: mike1pol/drone-rocket
+  settings:
+    url:
+      from_secret: rocket_url
+    user_id:
+      from_secret: rocket_id
+    token:
+      from_secret: rocket_token
+    channel:
+      from_secret: rocket_channel
+    message: >
+      {{#success build.status}}✅{{else}}❌{{/success}} Build {{build.status}}: *{{repo.fullname}}*
+
+      build: {{build.number}}
+
+      commit: {{build.branch}}:{{build.commit}}
+
+      By: {{build.author}}
+
+      {{build.message}}
+
+      {{build.link}}
+
+depends_on:
+- build
+
+trigger:
+  status:
+  - success
+  - failure
