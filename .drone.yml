@@ -5,6 +5,7 @@ steps:
   pull: always
   image: golang:1.12
   commands:
+    - make dep
     - make build
 
 - name: docker
