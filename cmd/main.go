@@ -9,6 +9,8 @@ import (
 	"github.com/joho/godotenv"
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/urfave/cli"
+
+	rocket "mike1pol/drone-rocket"
 )
 
 var Version string
@@ -197,20 +199,20 @@ func run(c *cli.Context) error {
 		_ = godotenv.Load(c.String("env-file"))
 	}
 
-	plugin := Plugin{
-		GitHub: GitHub{
+	plugin := rocket.Plugin{
+		GitHub: rocket.GitHub{
 			Workflow:  c.String("github.workflow"),
 			Workspace: c.String("github.workspace"),
 			Action:    c.String("github.action"),
 			EventName: c.String("github.event.name"),
 			EventPath: c.String("github.event.path"),
 		},
-		Repo: Repo{
+		Repo: rocket.Repo{
 			FullName:  c.String("repo"),
 			Namespace: c.String("repo.namespace"),
 			Name:      c.String("repo.name"),
 		},
-		Build: Build{
+		Build: rocket.Build{
 			Tag:      c.String("build.tag"),
 			Number:   c.Int("build.number"),
 			Event:    c.String("build.event"),
@@ -226,7 +228,7 @@ func run(c *cli.Context) error {
 			Started:  c.Float64("job.started"),
 			Finished: c.Float64("job.finished"),
 		},
-		Config: Config{
+		Config: rocket.Config{
 			Url:     c.String("url"),
 			UserID:  c.String("user-id"),
 			Token:   c.String("token"),
@@ -234,7 +236,7 @@ func run(c *cli.Context) error {
 			Drone:   c.Bool("drone"),
 			GitHub:  c.Bool("github"),
 		},
-		Payload: Payload{
+		Payload: rocket.Payload{
 			Avatar:  c.String("avatar-url"),
 			Channel: c.String("channel"),
 		},
