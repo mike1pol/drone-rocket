@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io/ioutil"
+	"log"
 	"net/http"
 	"strings"
 
@@ -148,13 +150,22 @@ func (p *Plugin) SendMessage(msg string) error {
 	if err != nil {
 		return err
 	}
+	req.Header.Add("Content-Type", "application/json")
 	req.Header.Add("X-User-Id", p.Config.UserID)
 	req.Header.Add("X-Auth-Token", p.Config.Token)
 	resp, err := client.Do(req)
-	defer resp.Body.Close()
 	if err != nil {
 		return err
 	}
-
+	if resp.StatusCode != http.StatusOK {
+		body, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			return err
+		}
+		log.Println("Rocket.Chat server error response")
+		log.Printf("Status: %s\n", resp.Status)
+		log.Fatalf("Body: %s\n", string(body))
+	}
+	defer resp.Body.Close()
 	return nil
 }
