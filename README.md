@@ -1,24 +1,22 @@
-<img src="https://rocket.chat/images/default/logo--dark.svg">
+# drone-[rocket](https://rocket.chat) [![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/mike1pol/drone-rocket/latest)](https://hub.docker.com/r/mike1pol/drone-rocket/) [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/mike1pol/drone-rocket/latest)](https://hub.docker.com/r/mike1pol/drone-rocket/tags)
 
-# drone-[rocket](https://rocket.chat)
+> [Drone](https://www.drone.io/) plugin for sending [Rocket.Chat](https://rocket.chat) messages to a channel using the latest [REST API v1](https://developer.rocket.chat/reference/api/rest-api).<br>
 
-Drone plugin for sending message to Rocket.Chant channel using API.
-
-[![Build Status](https://ci.piterjs.org/api/badges/mike1pol/drone-rocket/status.svg)](https://ci.piterjs.org/mike1pol/drone-rocket)
-[![Docker Pulls](https://img.shields.io/docker/pulls/mike1pol/drone-rocket.svg)](https://hub.docker.com/r/mike1pol/drone-rocket/)
-[![](https://images.microbadger.com/badges/image/mike1pol/drone-rocket.svg)](https://microbadger.com/images/mike1pol/drone-rocket "Get your own image badge on microbadger.com")
-
-
-Sending Rocket.Chat message using a binary, docker or [Drone CI](http://docs.drone.io/).
-
+Sending [Rocket.Chat](https://rocket.chat) message using a binary, Docker or [Drone CI](http://docs.drone.io/).
 
 ## Usage
 
-There are three ways to send notification.
+There are three ways to send notifications.
 
-* [usage from binary](#usage-from-binary)
-* [usage from docker](#usage-from-docker)
-* [usage from drone ci](#usage-from-drone-ci)
+- [drone-rocket](#drone-rocket)
+  - [Usage](#usage)
+    - [Usage from binary](#usage-from-binary)
+      - [Send Notification](#send-notification)
+    - [Usage from Docker](#usage-from-docker)
+      - [Send Notification](#send-notification-1)
+    - [Usage from Drone CI](#usage-from-drone-ci)
+      - [Send Notification](#send-notification-2)
+  - [Testing](#testing)
 
 <a name="usage-from-binary"></a>
 ### Usage from binary
@@ -35,7 +33,7 @@ drone-rocket \
 ```
 
 <a name="usage-from-docker"></a>
-### Usage from docker
+### Usage from Docker
 
 #### Send Notification
 
@@ -51,7 +49,7 @@ docker run --rm \
 ```
 
 <a name="usage-from-drone-ci"></a>
-### Usage from drone ci
+### Usage from Drone CI
 
 #### Send Notification
 
