@@ -188,6 +188,10 @@ func main() {
 			EnvVar: "GITHUB_WORKSPACE",
 		},
 	}
+	
+	if _, err := os.Stat("/run/drone/env"); err == nil {
+		godotenv.Overload("/run/drone/env")
+	}
 
 	if err := app.Run(os.Args); err != nil {
 		log.Fatal(err)
